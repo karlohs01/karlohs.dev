@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: "Michroma";
-    src: url("../karlohs01.github.io/Michroma-Regular.ttf") format("truetype");
+    src: url("Michroma-Regular.ttf") format("truetype");
 }
 
 body {
@@ -15,7 +15,72 @@ body {
     width: auto;
     height: auto;
     font-family: "Michroma";
+    position: relative;
 }
+
+@property --y {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -1%;
+}
+
+
+.snowfall, .snowfall::before, .snowfall::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    overflow: hidden;
+    pointer-events: none;
+
+    background-image: 
+        radial-gradient(
+            circle at 5% calc(var(--y) * 1.2),
+            #fff 3px, transparent 5px
+        ),
+        radial-gradient(
+            circle at 25% calc(var(--y) * 1.5),
+        #fff 2px, transparent 7px);
+
+
+}
+
+.snowfall {
+    animation: snowfall 20s linear infinite,
+    wind 25s ease-in-out infinite;
+    background-size: 75% 100%;
+}
+
+.snowfall::before {
+    inset: -5rem 0 0;
+    opacity: 0.5;
+    animation: snowfall 25s linear infinite,
+    wind 35s ease-in-out infinite;
+    background-size: 45% 100%;
+}
+
+.snowfall::after {
+    inset: -7rem 0 0;
+    opacity: 0.75;
+    animation: snowfall 23s linear infinite,
+    wind 45s ease-in-out infinite;
+    background-size: 69% 100%;
+}
+
+@keyframes snowfall {
+    0% {
+        --y: -1%;
+    }
+    100% {
+        --y: 101%;
+    }
+}
+
+@keyframes wind {
+    50% {
+        translate: 300px;
+    }
+}
+
 
 .portrait {
     width: 400px;
